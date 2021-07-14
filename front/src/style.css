@@ -1,0 +1,48 @@
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+@import "https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,500,600,700";
+
+body{
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #1b1e21;
+  color: antiquewhite;
+}
+
+::selection {
+  background: #FF8C34; /* WebKit/Blink Browsers */
+  color: #ffffff;
+}
+::-moz-selection {
+  background: #FF8C34; /* Gecko Browsers */
+  color: #ffffff;
+}
+
+a{
+  color: rgb(142, 201, 201);
+  text-decoration: unset;
+}
+a:hover {
+  color: rgb(122, 167, 167);
+  text-decoration: unset;
+}
+a:visited{
+  color: rgb(142, 201, 201);
+  text-decoration: unset;
+}
+
+ul {
+  margin: 1.5rem;
+  list-style: none;
+}
+
+button,
+input[type='submit']{
+  border: none;
+  background: none;
+  color: unset;
+  cursor: pointer;
+}

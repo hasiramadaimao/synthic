@@ -1,24 +1,44 @@
-import logo from './logo.svg';
+import React, { useState } from 'react'
 import './App.css';
+import ProtectedRoute from "react-protected-route-component"
+
+import MainContext from './Context/MainContext'
+import ItemContext from './Context/ItemContext';
+
+import LoginPage from './Components/LoginPage'
+import DashBoard from './Components/DashBoard'
+
 
 function App() {
+
+  const [logged, setLogged] = useState(false)
+  const [item, setItem] = useState(null)
+
+  let guardFun = () => {
+    if (logged) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  let guardFunRev = () => {
+    if (!logged) {
+      return true
+    } else {
+      return false
+    }
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MainContext.Provider value={{ logged, setLogged }}>
+      <ItemContext.Provider value={{ item, setItem }}>
+        <div className="App">
+          <ProtectedRoute path="/" component={LoginPage} guardFunction={guardFunRev} />
+          <ProtectedRoute path="/" component={DashBoard} guardFunction={guardFun} />
+        </div>
+      </ItemContext.Provider>
+    </MainContext.Provider>
   );
 }
 
