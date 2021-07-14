@@ -10,7 +10,6 @@ from time import sleep
 def convert_img_to_b64():
     with open("imagex.jpg", "rb") as img:
         stringx = base64.b64encode(img.read())
-    print(stringx)
     return stringx
 
 
@@ -22,7 +21,9 @@ def capture_image_and_send_to_api():
             "imagex.jpg"
             ])
         camera.stop_preview()
-        convert_img_to_b64()
+        b64 = convert_img_to_b64()
+        # use api here
+        # 
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -85,11 +86,11 @@ while True:
         #     print("Remaining time to dispance", timmer)
         #     sleep(1)
         
+        capture_image_and_send_to_api()
         for i in range(5):
             sleep(1)
-            print('Wait for ', i, 'sec')
+            print('Wait for ', 5 - i, 'sec')
         
-        capture_image_and_send_to_api()
         GPIO.output(In1,GPIO.LOW)
         GPIO.output(In1,GPIO.HIGH)
         pwm.ChangeDutyCycle(50)
