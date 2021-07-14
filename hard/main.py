@@ -7,6 +7,7 @@ import sys
 import RPi.GPIO as GPIO
 from time import sleep
 import requests
+import json
 
 def convert_img_to_b64():
     with open("imagex.jpg", "rb") as img:
@@ -29,7 +30,7 @@ def capture_image_and_send_to_api():
 def sendDataToBackend(imgb64):
     url = 'http://localhost:5000/user/saveData'
     toBeSent = {"img" : str(imgb64)}
-    payload = str(toBeSent)
+    payload = json.dumps(toBeSent)
     header = {
         'Content-Type': 'application/json'
     }
