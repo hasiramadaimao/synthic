@@ -29,11 +29,12 @@ def capture_image_and_send_to_api():
 
 def sendDataToBackend(imgb64):
     url = 'http://localhost:5000/user/saveData'
-    toBeSent = {"img" : imgb64}
+    toBeSent = {"img" : imgb64.decode('ascii')}
     payload = json.dumps(toBeSent)
     header = {
         'Content-Type': 'application/json'
     }
+    #authkey.decode("ascii")
     print('sending data to backend')
     r = requests.request("post", url, headers = header, data = payload)
     print(r.text)
