@@ -4,6 +4,7 @@ const fs = require('fs');
 
 router.post('/saveData', async (req, res) => {
   try {
+    console.log(req.body)
     const { img } = req.body;
     const timeStamp = new Date().getTime();
     const todayDate = new Date();
