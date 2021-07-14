@@ -79,13 +79,7 @@ while True:
     
     if distance <=10:
         print ("Please put your hand below dispensor")
-        # set_time=5
-        # timmer = "start"
-        # while timmer =="start":
-        #     set_time=set_time-1
-        #     print("Remaining time to dispance", timmer)
-        #     sleep(1)
-        
+        print ('Capturing image...')
         capture_image_and_send_to_api()
         for i in range(5):
             sleep(1)
@@ -93,9 +87,9 @@ while True:
         
         GPIO.output(In1,GPIO.LOW)
         GPIO.output(In1,GPIO.HIGH)
-        pwm.ChangeDutyCycle(50)
+        pwm.ChangeDutyCycle(30)
         print("Please move forward")
-        time.sleep(10)
+        time.sleep(1)
         GPIO.output(In1,GPIO.LOW)
 
 
