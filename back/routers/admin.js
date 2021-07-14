@@ -57,7 +57,7 @@ router.get('/getDays', (req, res) => {
             console.log(files)
             return res.send({
               success: true,
-              days: files
+              items: files
             });
           }
         });

@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import Header from './Header'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faCircleNotch, faLink, faArrowCircleRight } from '@fortawesome/free-solid-svg-icons'
-import { Container, Card, Row, Button, Col } from 'react-bootstrap'
+import { Container, Card, Row, Button, Col, Carousel } from 'react-bootstrap'
 
 import { instance } from '../axiosconfig'
 
 const DashBoard = () => {
 
   const [days, setDays] = useState(null)
+  const [items, setItems] = useState(null)
+  const [day, setDay] = useState(null)
 
   let getDashData = () => {
     var config = {
@@ -18,7 +20,7 @@ const DashBoard = () => {
     instance(config)
       .then((res) => {
         if (res.data) {
-          setDays(res.data)
+          setDays(res.data.items)
           console.log(res.data)
         }
       }).catch((err) => {
@@ -30,6 +32,24 @@ const DashBoard = () => {
     getDashData()
   }, [])
 
+  let getIndData = (day) => {
+    var config = {
+      method: 'get',
+      url: `admin/getFiles?day=${day}`
+    }
+    instance(config)
+      .then((res) => {
+        if (res.data) {
+          console.log(res.data)
+          setDay(day)
+          setItems(res.data.files)
+        } else {
+          setItems(null)
+        }
+      }).catch((err) => {
+        setItems(null)
+      })
+  }
 
   return (
     <div>
@@ -42,25 +62,78 @@ const DashBoard = () => {
 
         <Row xs={1} sm={3} xl={3} noGutters='true'>
 
-          {days ?
+          {days && days.length !== 0 ?
             (
-              <Col className="col-lg-4 ml-auto">
-                <Card bg='info'>
-                  <div className="p-3 media d-flex">
-                    <h1 className="mr-auto"><FontAwesomeIcon icon={faLink} /></h1>
-                    <div className="ml-auto">
-                      <h3>xxx</h3>
-                      <span>Subdomains</span>
-                    </div>
-                  </div>
-                </Card>
-              </Col>
+              days.map((item, index) => {
+                return (
+                  <Col
+                    style={{ "cursor": "pointer" }}
+                    className="col-lg-4 ml-auto"
+                    onClick={() => {
+                      getIndData(item)
+                    }}
+                  >
+                    <Card bg='info'>
+                      <div className="p-3 media d-flex">
+                        <h1 className="mr-auto"> {days[index].split('-')[0]} </h1>
+                        <div className="ml-auto">
+                          <h3>{days[index].split('-')[1]}</h3>
+                          <span>{days[index].split('-')[2]} - {days[index].split('-')[3]}</span>
+                        </div>
+                      </div>
+                    </Card>
+                  </Col>
+                )
+              })
             ) :
             (<i className='go-center'>no items</i>)}
 
         </Row>
       </Container>
-    </div>
+      {
+        items && items.length !== 0 ?
+          (
+            <div>
+              <Container fluid>
+                <div
+                  style={{ 'color': "black", "cursor": "pointer", 'padding': "10px", 'backgroundColor': "red", 'width': "30px", 'height': "30px" }}
+                  onClick={() => {
+                    setItems(null)
+                  }}
+                >X</div>
+                <div className="cOpen animate__animated animate__bounceInRight">
+                  <Container>
+                    <Carousel defaultActiveIndex={0} indicators>
+
+                      {items.map((i, index) => {
+                        return (
+                          <Carousel.Item
+                            key={index}
+                            interval={10000}>
+                            <img
+                              className="d-block w-100"
+                              src={`http://localhost:5000/static/${day}/${i}`}
+                              alt={'add the timeof the day here'}
+                            />
+                            <Carousel.Caption
+                              key={index}
+                              className="darkTransparent">
+                              <p>{day}</p>
+                            </Carousel.Caption>
+                          </Carousel.Item>
+                        )
+                      })}
+
+
+                    </Carousel>
+                  </Container>
+                </div>
+              </Container>
+            </div>
+          ) :
+          null
+      }
+    </div >
   );
 }
 
