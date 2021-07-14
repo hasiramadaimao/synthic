@@ -6,6 +6,7 @@ import signal
 import sys
 import RPi.GPIO as GPIO
 from time import sleep
+import requests
 
 def convert_img_to_b64():
     with open("imagex.jpg", "rb") as img:
