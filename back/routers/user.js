@@ -18,7 +18,11 @@ router.post('/saveData', async (req, res) => {
     fse.ensureDir(dir)
       .then(() => {
         let buff = new ArrayBuffer(img, 'base64');
-        fs.writeFile(filePath, buff)
+        fs.writeFile(filePath, buff, (err) => {
+          if(err){
+            console.log(err)
+          }
+        })
         // fs.writeFile(filePath, img, 'base64', (err) => {
         //   if (err) {
         //     console.log(err);
