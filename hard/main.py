@@ -14,7 +14,7 @@ def convert_img_to_b64():
     return stringx
 
 
-def capture_image():
+def capture_image_and_send_to_api():
     with picamera.PiCamera() as camera:
         camera.start_preview()
         time.sleep(2)
@@ -78,14 +78,18 @@ while True:
     
     if distance <=10:
         print ("Please put your hand below dispensor")
-        set_time=5
-        timmer = "start"
-        while timmer =="start":
-            timmer=set_time-1
-            print("Remaining time to dispance", timmer)
-            sleep(1)
+        # set_time=5
+        # timmer = "start"
+        # while timmer =="start":
+        #     set_time=set_time-1
+        #     print("Remaining time to dispance", timmer)
+        #     sleep(1)
         
-        capture_image()
+        for i in range(5):
+            sleep(1)
+            print('Wait for ', i, 'sec')
+        
+        capture_image_and_send_to_api()
         GPIO.output(In1,GPIO.LOW)
         GPIO.output(In1,GPIO.HIGH)
         pwm.ChangeDutyCycle(50)
