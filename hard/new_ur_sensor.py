@@ -55,25 +55,20 @@ while True:
 
     print ("Distance: %.1f cm" % distance)
     print (distance)
-    time.sleep(1)
+
     
     if distance <=10:
         print ("Please put your hand below dispensor")
-        set_time=5
-        timmer = "start"
-        while timmer =="start":
-            timmer=set_time-1
-            print("Remaining time to dispance",timmer)
+        #set_time=5
+        #timmer = "start"
+        #while timmer =="start":
+            #timmer=set_time-1
+            #print("Remaining time to dispance",timmer)
         
         GPIO.output(In1,GPIO.LOW)
         GPIO.output(In1,GPIO.HIGH)
         pwm.ChangeDutyCycle(50)
-        GPIO.output(In1,GPIO.LOW)
         print("Please move forward")
-        time.sleep(10)
-
-        
-
-        
-        
+        time.sleep(1)
+        GPIO.output(In1,GPIO.LOW)
         
