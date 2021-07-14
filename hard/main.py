@@ -28,7 +28,7 @@ def capture_image_and_send_to_api():
 
 def sendDataToBackend(imgb64):
     url = 'http://localhost:5000/user/saveData'
-    toBeSent = {"img" : imgb64}
+    toBeSent = {"img" : str(imgb64)}
     print('sending data to backend')
     r = requests.post(url, data = toBeSent)
     print(r.text)
