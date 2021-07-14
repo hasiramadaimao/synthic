@@ -13,15 +13,17 @@ router.post('/saveData', async (req, res) => {
 
     const dir = `./public/static/${thatDay}`;
     const fileName = `${timeStamp}`;
-    const filePath = `${dir}/${fileName}.jpg`;
+    const filePath = `${dir}/${fileName}.png`;
 
     fse.ensureDir(dir)
       .then(() => {
-        fs.writeFile(filePath, img, 'base64', (err) => {
-          if (err) {
-            console.log(err);
-          }
-        })
+        let buff = new ArrayBuffer(img, 'base64');
+        fs.writeFile(filePath, buff)
+        // fs.writeFile(filePath, img, 'base64', (err) => {
+        //   if (err) {
+        //     console.log(err);
+        //   }
+        // })
       })
       .catch(e => {
         console.log(e);
