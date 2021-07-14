@@ -9,6 +9,7 @@ require('dotenv').config({ path: path.resolve(__dirname, './.env') })
 
 const app = express();
 app.use(cors());
+app.use(express.bodyParser({limit: '50mb'}));
 app.use(express.static(path.join(__dirname, 'static')));
 app.use(express.json());
 
