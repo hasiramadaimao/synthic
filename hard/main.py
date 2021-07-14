@@ -94,9 +94,9 @@ while True:
         GPIO.output(In1,GPIO.LOW)
         GPIO.output(In1,GPIO.HIGH)
         pwm.ChangeDutyCycle(50)
-        GPIO.output(In1,GPIO.LOW)
         print("Please move forward")
         time.sleep(10)
+        GPIO.output(In1,GPIO.LOW)
 
 
 
