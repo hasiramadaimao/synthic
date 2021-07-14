@@ -52,7 +52,7 @@ const LoginPage = () => {
             <div className="col-md-3">
               <Form className="card-body" onSubmit={submit}>
                 <div className="title-holder">
-                  <h3>Login</h3>
+                  <h3>Admin Login</h3>
                 </div>
                 {err ? <Alert variant="warning">{err}</Alert> : null}
                 <Form.Group controlId="email">

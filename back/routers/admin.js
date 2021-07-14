@@ -2,6 +2,7 @@ const router = require('express').Router();
 const fs = require('fs');
 const path = require('path');
 const cred = path.resolve(__dirname, './credencial.json');
+const fse = require('fs-extra')
 
 router.post('/login', async (req, res) => {
   try {
@@ -10,7 +11,6 @@ router.post('/login', async (req, res) => {
       username,
       password
     };
-
     fs.readFile(cred, 'utf8', (err, data) => {
       if (err) {
         console.log(err);
@@ -41,21 +41,35 @@ router.post('/login', async (req, res) => {
 
 router.get('/getDays', (req, res) => {
   try {
-    fs.readdir(path.resolve(__dirname, '../public/static'), (err, files) => {
-      if (err) {
-        return res.status(500).send({
+
+    const dir = `./public/static/`;
+
+    fse.ensureDir(dir)
+      .then((response) => {
+        fs.readdir(path.resolve(__dirname, '../public/static'), (err, files) => {
+          if (err) {
+            console.log(err)
+            return res.status(500).send({
+              success: false,
+              message: 'Error reading days directory'
+            });
+          } else {
+            console.log(files)
+            return res.send({
+              success: true,
+              days: files
+            });
+          }
+        });
+      }).catch((e) => {
+        return res.status(500).json({
           success: false,
-          message: 'Error reading days directory'
-        });
-      } else {
-        console.log(files)
-        return res.send({
-          success: true,
-          days: files
-        });
-      }
-    });
+          error: e.message
+        })
+      })
+
   } catch (e) {
+    console.log(e)
     return res.status(500).json({
       success: false,
       error: e.message

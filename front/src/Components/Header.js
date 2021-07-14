@@ -19,9 +19,8 @@ const Header = () => {
       <Container fluid>
         <Navbar expand='lg' variant="dark" className={scroll ? "fixed-top black-nav" : "fixed-top"}>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Nav.Link as={Link} to="/">Home</Nav.Link>
           <Nav className="ml-auto" navbar>
-            <Nav.Link onClick={() => setLogged(false) } as={Link} to="/">Logout</Nav.Link>
+            <Nav.Link onClick={() => setLogged(false)} as={Link} to="/">Logout</Nav.Link>
           </Nav>
         </Navbar>
       </Container>
