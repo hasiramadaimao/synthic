@@ -29,8 +29,12 @@ def capture_image_and_send_to_api():
 def sendDataToBackend(imgb64):
     url = 'http://localhost:5000/user/saveData'
     toBeSent = {"img" : str(imgb64)}
+    payload = str(toBeSent)
+    header = {
+        'Content-Type': 'application/json'
+    }
     print('sending data to backend')
-    r = requests.post(url, data = toBeSent)
+    r = requests.request("post", url, headers = header, data = payload)
     print(r.text)
 
 GPIO.setmode(GPIO.BCM)
