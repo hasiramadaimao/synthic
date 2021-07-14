@@ -13,7 +13,7 @@ router.post('/saveData', async (req, res) => {
 
     const dir = `./public/static/${thatDay}`;
     const fileName = `${timeStamp}`;
-    const filePath = `${dir}/${fileName}.png`;
+    const filePath = `${dir}/${fileName}.jpg`;
 
     fse.ensureDir(dir)
       .then(() => {
