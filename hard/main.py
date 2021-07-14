@@ -24,7 +24,14 @@ def capture_image_and_send_to_api():
         camera.stop_preview()
         b64 = convert_img_to_b64()
         # use api here
-        # 
+        sendDataToBackend(b64)
+
+def sendDataToBackend(imgb64):
+    url = 'http://localhost:5000/user/saveData'
+    data = {"img" : imgb64}
+    print('sending data to backend')
+    r = requests.post(url, data)
+    print(r)
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
