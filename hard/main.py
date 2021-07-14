@@ -81,9 +81,9 @@ while True:
         print ("Please put your hand below dispensor")
         print ('Capturing image...')
         capture_image_and_send_to_api()
-        for i in range(5):
+        for i in range(3):
             sleep(1)
-            print('Wait for ', 5 - i, 'sec')
+            print('Wait for ', 3 - i, 'sec...')
         
         GPIO.output(In1,GPIO.LOW)
         GPIO.output(In1,GPIO.HIGH)
