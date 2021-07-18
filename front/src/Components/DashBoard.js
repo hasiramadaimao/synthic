@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Header from './Header'
+import { Container, Card, Row, Col, Carousel } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch, faCircleNotch, faLink, faArrowCircleRight } from '@fortawesome/free-solid-svg-icons'
-import { Container, Card, Row, Button, Col, Carousel } from 'react-bootstrap'
 
 import { instance } from '../axiosconfig'
+import { faCompressArrowsAlt, faCross, faDoorClosed } from '@fortawesome/free-solid-svg-icons';
 
 const DashBoard = () => {
 
@@ -95,13 +95,15 @@ const DashBoard = () => {
           (
             <div>
               <Container fluid>
-                <div
-                  style={{ 'color': "black", "cursor": "pointer", 'padding': "10px", 'backgroundColor': "red", 'width': "30px", 'height': "30px" }}
-                  onClick={() => {
-                    setItems(null)
-                  }}
-                >X</div>
                 <div className="cOpen animate__animated animate__bounceInRight">
+                  <div
+                    style={{ 'color': "red", "cursor": "pointer", "position":"absolute" }}
+                    onClick={() => {
+                      setItems(null)
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faCompressArrowsAlt} />
+                  </div>
                   <Container>
                     <Carousel defaultActiveIndex={0} indicators>
 
